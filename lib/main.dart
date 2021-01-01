@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'service/fetchPharmacy.dart' as service;
 
 void main() {
   runApp(MyApp());
@@ -24,7 +25,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("Hadi Bakalım"),
+        child: FutureBuilder<List<dynamic>>(
+            future: service.fetchPharmacy(),
+            builder: (context, snapshot) {
+              return Text(snapshot.data[0]["eczane_adi"].toString());
+            }),
       ),
     );
   }
